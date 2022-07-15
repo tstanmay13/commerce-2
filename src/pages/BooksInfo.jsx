@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
+import Book from '../componenets/UI/Book';
 import Price from '../componenets/UI/Price';
 import Rating from '../componenets/UI/Rating';
 
@@ -37,13 +38,13 @@ const Booksinfo = ({books}) => {
                                 </div>
 
                                 <div className="book__summary">
-                                    <div className="book__summary--title">
+                                    <h3 className="book__summary--title">
                                         Summary
-                                    </div>
-                                    <p className="book__summary__para">
+                                    </h3>
+                                    <p className="book__summary--para">
                                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat incidunt atque omnis exercitationem! Eos, iure? Corrupti a nobis reiciendis itaque numquam dolor sit nihil commodi, neque accusantium rerum. Quas, delectus!
                                     </p>
-                                    <p className="book__summary__para">
+                                    <p className="book__summar--para">
                                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat incidunt atque omnis exercitationem! Eos, iure? Corrupti a nobis reiciendis itaque numquam dolor sit nihil commodi, neque accusantium rerum. Quas, delectus!
                                     </p>
 
@@ -60,6 +61,14 @@ const Booksinfo = ({books}) => {
                             <h2 className="book__selected--title--top">
                                 Recommended Books
                             </h2>
+                        </div>
+                        <div className="books">
+                            {
+                                books
+                                .filter(book => book.rating === 5 && +book.id !== +id)
+                                .slice(0,4)
+                                .map(book => <Book book={book} key={book.id}/>)
+                            }
                         </div>
                     </div>
                 </div>
