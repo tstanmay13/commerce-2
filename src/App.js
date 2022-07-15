@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Books from "./componenets/Books";
 import { books } from './data';
 import Booksinfo from "./pages/BooksInfo";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" exact element={<Home />}/>
           <Route path="/books" exact element={<Books books={books}/>}/>
           <Route path="/books/:id" exact element={<Booksinfo books={books}/>}/>
+          <Route path="/cart" element={<Cart books={books}/>}/>
         </Routes>
         <Footer />
       </div>

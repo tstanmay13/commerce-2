@@ -23,10 +23,9 @@ const Booksinfo = ({books}) => {
                                 <h2 className="book__selected--title--top">Books</h2>
                             </Link>
                         </div>
-
                         <div className="book__selected">
                             <figure className="book__selected--figure">
-                                <img src={book.url} alt="" />
+                                <img src={book.url} alt="" className="book__sselected--img"/>
                             </figure>
                             <div className="book__selected--description">
                                 <h2 className="book_-selected--title">
