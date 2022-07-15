@@ -1,24 +1,23 @@
-
-import './index.css';
-import Nav from './componenets/Nav';
-import Landing from './componenets/Landing';
-import Highlights from './componenets/Highlights';
-import Featured from './componenets/Featured';
-import Discounted from './componenets/Discounted';
-import Explore from './componenets/Explore';
-import Footer from './componenets/Footer';
+import "./index.css";
+import Nav from "./componenets/Nav";
+import Footer from "./componenets/Footer";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Books from "./componenets/Books";
+import { books } from './data';
 
 function App() {
   return (
-    <div className="App">
-      <Nav/>
-      <Landing/>
-      <Highlights/>
-      <Featured />
-      <Discounted />
-      <Explore />
-      <Footer />
-    </div>
+    <Router>
+      <div className="App">
+        <Nav />
+        <Routes>
+          <Route path="/" exact element={<Home />}/>
+          <Route path="/books" element={<Books books={books}/>}/>
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
