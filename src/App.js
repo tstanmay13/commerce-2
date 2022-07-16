@@ -20,6 +20,10 @@ function App() {
    setCart(cart.map(item => item.id === book.id ? {...item, quantity: +quantity}: (item)))
 
  }
+ 
+ function removeItem(item){
+   setCart(cart.filter(book => book.id !== item.id))
+ }
 
  useEffect(() => {
    console.log(cart);
@@ -33,7 +37,7 @@ function App() {
           <Route path="/" exact element={<Home />}/>
           <Route path="/books" exact element={<Books books={books}/>}/>
           <Route path="/books/:id" exact element={<Booksinfo books={books} addToCart={addToCart} cart={cart}/>}/>
-          <Route path="/cart" element={<Cart cart={cart} changeQuantity={changeQuantity}/>}/>
+          <Route path="/cart" element={<Cart cart={cart} changeQuantity={changeQuantity} removeItem={removeItem}/>}/>
         </Routes>
         <Footer />
       </div>

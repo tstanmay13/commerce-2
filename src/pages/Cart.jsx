@@ -1,8 +1,10 @@
 import React from 'react';
-import { useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import EmptyCart from "../assets/empty_cart.svg"
 
-const Cart = ({ cart, changeQuantity}) => {
-    const subtotal= () => {
+const Cart = ({ cart, changeQuantity, removeItem }) => {
+    const subtotal = () => {
         let price = 0
         cart.forEach(item => {
             price += +((item.salePrice || item.originalPrice) * item.quantity).toFixed(2)
@@ -10,7 +12,7 @@ const Cart = ({ cart, changeQuantity}) => {
 
         return price;
     }
-        
+
     return (
         <div id="books__body">
             <main id="books__main">
@@ -30,7 +32,7 @@ const Cart = ({ cart, changeQuantity}) => {
                             <div className="cart__body">
                                 {
                                     cart.map(book => {
-                                        const finalPrice  = (book.salePrice || book.originalPrice)
+                                        const finalPrice = (book.salePrice || book.originalPrice)
                                         const totalPrice = finalPrice * book.quantity
                                         return (
                                             <div className="cart__item">
@@ -38,17 +40,17 @@ const Cart = ({ cart, changeQuantity}) => {
                                                     <img src={book.url} alt="" className="cart__book--img" />
                                                     <div className="cart__book--info">
                                                         <span className="cart__book--title">
-                                                        {book.title}
+                                                            {book.title}
                                                         </span>
                                                         <span className="cart__book--price">
-                                                        ${finalPrice.toFixed(2)}
+                                                            ${finalPrice.toFixed(2)}
                                                         </span>
-                                                        <button className="cart__book--remove"> Remove</button>
+                                                        <button className="cart__book--remove" onClick={(_) => removeItem(book)}> Remove</button>
                                                     </div>
                                                 </div>
 
                                                 <div className="cart__quantity">
-                                                    <input type="number" min={0} max={99} className="cart__input" value={book.quantity} onChange={(event) => changeQuantity(book,event.target.value)}/>
+                                                    <input type="number" min={0} max={99} className="cart__input" value={book.quantity} onChange={(event) => changeQuantity(book, event.target.value)} />
                                                 </div>
 
                                                 <div className="cart__total">
@@ -60,8 +62,17 @@ const Cart = ({ cart, changeQuantity}) => {
                                 }
 
                             </div>
+
+                            {cart.length === 0 && <div className="cart__empty">
+                                <img src={EmptyCart} alt="" className="cart__empty--img" />
+
+                                <h2>You don't have any books in your cart!</h2>
+                                <Link to="/books">
+                                    <button className="btn">Browse Books</button>
+                                </Link>
+                            </div>}
                         </div>
-                        <div className="total">
+                        {cart.length > 0 && <div className="total">
                             <div className="total__item total__sub-total">
                                 <span>Subtotal</span>
                                 <span>${subtotal()}</span>
@@ -77,7 +88,7 @@ const Cart = ({ cart, changeQuantity}) => {
                             <button className="btn btn__checout no-cursor" onClick={() => alert(`Have't gotten around to finishing this`)}>
                                 Proceed to checkout
                             </button>
-                        </div>
+                        </div>}
                     </div>
                 </div>
             </main>
